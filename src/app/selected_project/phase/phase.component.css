@@ -1,0 +1,232 @@
+.content{
+    margin: 20px auto;
+    padding: 2vh;
+    text-align: center;
+}
+.name{
+    font-size: 1.3em;
+    font-weight: 600;
+    color: rgb(255,255,255);
+    margin: 20px;
+    text-align: center;
+}
+
+button{
+    min-height: 7vh;
+    width: 100%;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    border: solid 1px rgba(32, 190, 238, 0.72);
+    background-color: rgba(32, 190, 238, 0.72);
+    color: rgb(255,255,255);
+    font-weight: 500;
+    font-size: 1em;
+}
+button:hover{
+    background-color: rgb(255,255,255);
+    color: rgb(255,108,62);
+    font-weight: 700;
+}
+button:disabled{
+    border: solid 1px rgba(255,108,62,0.73)!important;
+    background-color: rgba(255,108,62,0.73)!important;
+    color: rgb(255,255,255)!important;
+}
+.skill{
+    margin-top: 3vh;
+}
+
+#logo{
+    max-height: 25vh;
+    margin: 20px auto 10px;
+}
+
+/* Forma */
+.forma{
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+}
+h2{
+    color: rgba(255,108,62,0.73);
+    font-size: 1.5em;
+    margin-bottom: 3vh;
+}
+h3{
+    color: rgba(255,108,62,0.73);
+    font-size: 1.3em;    
+    margin: 6vh auto 3vh;
+}
+
+input {
+    margin-bottom: 10px;
+    text-align: center;
+    background: transparent;
+    color: white;
+    border: none;
+    border-bottom: 2px solid rgba(32, 190, 238, 0.72);
+    padding-bottom: 5px;
+    font-size: 1.1em;
+}
+input::placeholder{
+    color: rgb(202, 199, 199);
+}
+input:focus{
+    background: transparent!important;
+    color: rgba(32, 190, 238, 0.72);
+}
+
+/* Tabela */
+table{
+    border-radius: 5px;
+    padding: 20px;
+    margin: 3vh auto;
+    width: 100%;
+    color: #fff;
+    font-weight: 400;
+    background: rgba(32, 190, 238, 0.72);
+}
+thead{
+    text-align: center;
+    background-color: rgb(0, 74, 122);
+    color: #fff;
+}
+th{
+    text-align: center!important;
+}
+tbody{
+    color: rgb(0, 74, 122);
+}
+tbody tr:hover{
+    background-color: rgb(0, 74, 122);
+    color:#fff;
+    border: 2px solid #fff;
+}
+tr.active {
+    background-color: rgba(32, 190, 238, 0.72);
+    font-weight: bold;
+    border: 2px solid #fff;
+    color:#fff;
+} 
+
+
+/* Template */
+
+.modal-body button{
+    min-height: 7vh;
+    width: 90%;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    border: 2px solid transparent;
+    background-color: rgba(32, 190, 238, 0.72);
+    font-weight: 500;
+    font-size: 1em;
+    color:#fff;
+}
+.modal-body button:hover{
+    background-color: transparent;
+    border: 2px solid rgba(32, 190, 238, 0.72);
+    font-weight: 700;
+}
+.skill{
+    margin-bottom: 10px!important;
+}
+.modal-header{
+    color: #fff;
+    align-items: center;
+}
+.modal-body input{
+    text-align: center;
+    font-weight: 600;
+}
+.modal-body{
+    padding-top: 5vh;
+}
+.btn-close{
+    width: 20%;
+    color: #fff;
+    text-align: center;
+    font-size: 1.5em;
+    border: none!important;
+    background: rgba(0, 73, 122, 0)!important;
+}
+.btn-close:hover{
+    background: rgba(0, 73, 122, 0)!important;
+    border: none!important;
+}
+
+h4{
+    font-size: 1.2em;
+    color: white;
+}
+
+.is-invalid{
+    border-color: rgb(143, 40, 40);
+}
+@media(min-width: 900px){
+    .content{
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 3vh;
+    }
+    .head{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0 auto;
+    }
+    button{
+        font-weight: 600;
+        font-size: 1.1em;
+        max-height: 12vh;
+        margin: 10px 0;
+        width: 40%;
+    }
+    .back{
+        max-width: 100%!important;
+    }
+    #logo{
+        max-height: 30vh;
+    }
+    .name{
+        font-size: 2.5em;
+        font-weight: 600;
+        max-height: 30vh;
+        margin: 20px auto 10px;
+    }
+    .forma{
+        width: 80%;
+    }
+    .small{
+        display: inline;
+        margin: 0 5px;
+    }
+    .inline{
+        width: 45%;
+    }
+    h2{
+        margin: 0 auto 5vh;
+        font-weight: 600;
+        font-size: 2em;
+        text-align: center;
+    }
+    h3 {
+        font-size: 1.9em;
+    }
+    .together{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 3vh;
+    }
+    .buttons{
+        margin-top: 3vh;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: space-around;
+    }
+}

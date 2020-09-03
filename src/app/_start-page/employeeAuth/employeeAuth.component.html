@@ -1,0 +1,27 @@
+<div class="surround">
+  <div class="content">
+    <img id = "logo" src="../../../assets/images/irc_logo.png" alt="irc_logo">
+    <h1>ПРИЈАВА ЗАПОСЛЕНОГ</h1>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <div class="form-group">
+        <input type="text"
+                placeholder="Корисничко име"
+                [(ngModel)] = "user.username"
+                required
+                name = "username"
+                class="form-control" required>
+      </div>
+      <div class="form-group">
+        <input type="password"
+                placeholder="Лозинка"
+                [(ngModel)] = "user.password"
+                required
+                name = "password"
+                class="form-control" required>
+      </div>
+      <div class="form-group buttons">
+        <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary">Улогуј се</button>
+      </div>
+    </form>
+  </div>
+</div>

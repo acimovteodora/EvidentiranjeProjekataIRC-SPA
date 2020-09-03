@@ -1,0 +1,17 @@
+<div class="surround">
+  <div class="content">
+    <img id = "logo" src="../../../assets/images/irc_logo.png" alt="irc_logo">
+    <h1 class="name">{{project.projectProposal.name}}</h1>
+    <div class="split">
+      <div class="left">
+        <p class="description">{{project.projectProposal.description}}</p>
+        <h2 class="company">КОМПАНИЈА: {{project.projectProposal.company.name}}</h2>
+      </div>
+      <div class="choice">
+        <button type="button" class="btn btn-primary" (click)="applications();">ОБРАДА СТУДЕНАТА</button>
+        <button type="button" class="btn btn-primary" (click)="projectPlan();">ОБРАДА ПЛАНА ПРОЈЕКТА</button>
+        <button type="button" class="btn btn-primary" (click)="back();">НАЗАД НА СВЕ ПРОЈЕКТЕ</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+.content{
+    width: 100%;
+    min-height: 100vh;
+    background: url(../assets/images/7.png) no-repeat center 50%/cover;
+    overflow: hidden;
+}

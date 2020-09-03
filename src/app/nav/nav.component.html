@@ -1,0 +1,6 @@
+  <div class="login" *ngIf="loggedIn()">
+    <h3 class="name" dropdownToggle>
+      {{currentEmployee?.name}} {{currentEmployee?.surname}}
+    </h3>
+    <button class="btn btn-primary logOut" type="button" (click)="logOut()">Odjavi se</button>
+  </div>

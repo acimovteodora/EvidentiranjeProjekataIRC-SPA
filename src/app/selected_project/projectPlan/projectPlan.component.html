@@ -1,0 +1,78 @@
+<div class="surround">
+  <div class="content">
+    <div class="head">
+      <img id = "logo" src="../../../assets/images/irc_logo.png" alt="irc_logo">
+      <h1 class="name">ПЛАН ПРОЈЕКТА:<br>{{project.projectProposal.name}}</h1>
+    </div>
+    
+    <form #projectPlanForm="ngForm">
+
+      <div class="form-group wider">
+        <div class="inline">
+          <p class="description">Датум почетка рада</p>
+        <input type="text"
+          placeholder="Датум почетка рада на пројекту"
+          class="form-control small"
+          [minDate]="minDate"
+          bsDatepicker
+          [(bsValue)]="estimatedStartDate"
+          [(ngModel)]="estimatedStartDate"
+          name = "estimatedStartDate"
+          required
+          [bsConfig] = "bsConfig">
+      </div>
+      <div class="inline">
+        <p class="description">Предвиђено трајање (дан)</p>
+         <input type="number"
+           placeholder="Трајање пројекта у данима"
+           class="form-control small"
+           min="7"
+           [(ngModel)]="duration"
+           name = "duration"
+           required>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <p class="description">Напомена</p>
+        <input type="text"
+          placeholder="Додатна напомена (опционо)"
+          class="form-control"
+          [(ngModel)]="note"
+          name = "note">
+      </div>
+      
+      <!-- Faze projekta -->
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="addPhase()" >Додај фазу пројекта</button>
+        
+        <table class="table table-borderless" *ngIf="phases !== undefined && phases.length > 0">
+          <thead>
+            <tr>
+              <th scope="col">Фазе у оквиру пројекта</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let phase of phases; let i = index">
+              <th scope="row">{{phase?.name}}</th>
+              <td (click)="editSelectedPhase(phase,i)"><i class="fa fa-edit"></i></td>
+              <td (click)="deleteSelectedPhase(i)"><i class="fa fa-trash"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+    <app-phase *ngIf="newPhase" [students] = "students" [phase] = "phaseForEdit" [datum] = "estimatedStartDate" (emitter)="methodAddPhase($event)"></app-phase>
+    <app-phase *ngIf="editPhase" [students] = "students" [phase] = "phaseForEdit" [datum] = "estimatedStartDate" (emitter)="methodEditPhase($event)"></app-phase>
+
+    <div class="form-group buttons">
+      <button type="button" class="btn btn-primary" (click)="save()" *ngIf="projectPlan === null" >Сачувај план</button>
+      <button type="button" class="btn btn-primary" *ngIf="projectPlan !== null" (click)="edit()">Измени план</button>
+      <button type="button" class="btn btn-primary" *ngIf="projectPlan !== null" (click)="delete()">Обриши план</button>
+      <button type="button" class="btn btn-primary" (click)="back()">Назад</button>
+    </div>
+   
+  </div>
+</div>

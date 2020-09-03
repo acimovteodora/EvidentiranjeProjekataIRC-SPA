@@ -1,0 +1,99 @@
+<div class="content">
+
+  <div class="head">
+    <img id = "logo" src="../../../assets/images/irc_logo.png" alt="irc_logo">
+    <h1 class="name">{{project.projectProposal.name}}</h1>
+  </div>
+
+  <div class="first">
+    <h2>Пријављени студенти</h2>
+    <input type="text"
+                placeholder="Претрага студената"
+                [(ngModel)]="criteria"
+                (keyup)="onKey()"
+                name = "criteria"
+                class="mt-3">
+    <table class="table table-borderless first-table">
+      <thead>
+        <tr>
+          <th scope="col">Број индекса</th>
+          <th scope="col">Име студента</th>
+          <th scope="col">Презиме студента</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let app of applications; let i = index" (click)="selected(app.student,i,template);" [class.active]="i == selectedRow">
+          <th scope="row">{{app?.student.index}}</th>
+          <th>{{app?.student.name}}</th>
+          <th>{{app?.student.surname}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="first">
+    <button type="button" class="btn btn-primary back" [routerLink]="['/projects/',project.projectID]">Назад на опис пројекта</button>
+  </div>
+</div>
+
+
+<ng-template #template id = "template">
+    <div class="modal-header">
+      <h4 class="modal-title my-title pull-left">Ангажовање студента</h4>
+      <button type="button" class="close pull-right btn-close" aria-label="Close"  (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #registerForm="ngForm">
+
+        <div class="student">
+          <div class="line">
+            <div class="subline">
+              <h4 *ngIf="application !== undefined" class="mt-4">Име и презиме:</h4>
+              <p *ngIf="application !== undefined">{{application?.student.name}} {{application?.student.surname}}</p>
+            </div>
+            <div class="subline">
+              <h4 *ngIf="application !== undefined" class="mt-4">Година студија:</h4>
+              <p *ngIf="application !== undefined">{{application?.student.yearOfStudy}}</p>
+            </div>
+          </div>
+          <div class="line">
+            <div class="form-group subline">
+              <h5 class="modal-title my-title">Почетак ангажовања</h5>
+              <input type="text"
+               placeholder="Датум почетка ангажовања"
+               class="form-control"
+               [(bsValue)]="startDate"
+               [minDate]="minDate"
+               [maxDate]="maxDate"
+               bsDatepicker
+               [bsConfig] = "bsConfig">
+            </div>
+            <div class="form-group subline">
+              <h5 class="modal-title my-title">Крај ангажовања</h5>
+                <input type="text"
+                 placeholder="Датум краја ангажовања"
+                 class="form-control"
+                 [(bsValue)]="endDate"
+                 [minDate]="minDate"
+                 [maxDate]="maxDate"
+                 bsDatepicker
+                 [bsConfig] = "bsConfig">
+            </div>
+          </div>
+            <h4 *ngIf="application !== undefined" class="mt-4">Студијски програм:</h4>
+            <p *ngIf="application !== undefined">{{application?.student.department}}</p>
+          <h4 *ngIf="application !== undefined" class="mt-4">Разлог аплицирања:</h4>
+          <p class="textarea" *ngIf="application !== undefined">{{application?.reason}}</p>
+        </div>
+        <div class="form-group buttons">
+          <button type="button" class="btn btn-primary" [disabled]="application?.accepted" *ngIf="odabran && !application?.accepted"
+          type="submit" (click)="save()">Ангажуј студента</button>
+          <button type="button" class="btn btn-primary" *ngIf="odabran && application?.accepted"
+          (click)="update()">Измени ангажовање</button>
+          <button type="button" class="btn btn-primary" *ngIf="odabran" (click)="delete()">Одбиј студента</button>
+        </div>
+      </form>
+  </div>
+</ng-template>

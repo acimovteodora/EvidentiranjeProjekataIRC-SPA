@@ -1,0 +1,96 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 50px;
+    align-items: center;
+    background-color:  rgba(17, 16, 35, 0.73);
+    width: 90%;
+    min-height: 85vh;
+}
+
+.choice{
+    text-align: center;
+    width: 90%;
+    margin: 20px auto;
+}
+
+button{
+    min-height: 7vh;
+    width: 90%;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    border: 2px solid transparent;
+    background-color: rgba(32, 190, 238, 0.72);
+    font-weight: 600;
+    font-size: 1em;
+}
+button:hover{
+    background-color: transparent;
+    border: 2px solid rgba(32, 190, 238, 0.72);
+    font-weight: 700;
+}
+
+.name{    
+    margin: 0 10px;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: rgb(255,255,255);
+    text-align: center;
+}
+.split{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.description{
+    color: rgb(255,255,255);
+    font-weight: 500;
+    font-size: 1.2em;
+    text-align: justify;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.company{
+    color: rgb(255, 108, 62);
+    font-weight: 600;
+    font-size: 1.4em;
+    text-align: justify;
+    margin: 20px auto;
+    width: 90%;
+}
+
+#logo{
+    max-height: 25vh;
+    margin: 20px auto;
+}
+
+
+@media(min-width: 900px){
+    .content{
+        width: 70%;
+        margin-bottom: 10px;
+    }
+    .split{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .choice{
+        min-width: 30%;
+    }
+    button{
+        font-weight: 600;
+        min-height: 8vh;
+    }
+    #logo{
+        max-height: 30vh;
+    }
+    .name{
+        font-size: 2em;
+        font-weight: 600;
+        width: 80%;
+        margin: 0;
+    }
+}

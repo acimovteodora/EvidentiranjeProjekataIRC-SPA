@@ -1,0 +1,88 @@
+<div class="surround">
+  <div class="content">
+    <div class="head">
+      <img id = "logo" src="../../../assets/images/irc_logo.png" alt="irc_logo">
+      <div class="name">
+        <h1>ПРИЈАВА ЗА РАД НА ПРОЈЕКТУ:</h1>
+        <h1>{{project.projectProposal.name}}</h1>
+      </div>
+    </div>
+      
+    <div class="data">
+      
+      <p class="description">{{project.description}}</p>
+      <p class="description">ПРЕДВИЂЕНЕ АКТИВНОСТИ: {{project.projectProposal.activities}}</p>
+      <h3 class="company">ПОЧЕТАК РАДА НА ПРОЈЕКТУ: {{setDate(project.projectProposal.startDateProjectProposal)}}</h3>
+      <p class="description">ПРЕДВИЂЕНО ТРАЈАЊЕ ПРОЈЕКТА (ДАН):  {{project.projectProposal.daysDuration}}</p>
+      <p class="description ">ЦИЉ: {{project.projectProposal.goal}}</p>
+      <p class="description">МЕНТОР НА ПРОЈЕКТУ: {{project.internalMentor.name}} {{project.internalMentor.surname}}</p>
+      <p class="description" *ngIf="project.note !== null">{{project.note}}</p>
+      <div class="subjects">        
+        <h3 class="company">ТЕМЕ ПОКРИЋА:</h3>
+        <p class="subject description" *ngFor="let subject of project.projectProposal.subjects">
+          {{subject.name}}: {{subject.description}}
+        </p>
+      </div>
+      <h3 class="company">КОМПАНИЈА: {{project.projectProposal.company.name}}</h3>
+
+      <div class="student">
+        <h2>Студенти</h2>
+        <input type="text"
+                  placeholder="Претрага студената"
+                  [(ngModel)]="criteria"
+                  (keyup)="onKey()"
+                  name = "criteria">
+        <table class="student_table">
+          <thead>
+            <tr>
+              <th scope="col">Број индекса</th>
+              <th scope="col">Име и презиме студента</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students; let i = index" (click)="selectedS(student,i)" [class.active]="i == selectedStudent">
+              <th>{{student.index}}</th>
+              <th>{{student.name}} {{student.surname}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <form #registerForm="ngForm">
+        <div class="form-group">
+          <h3 class="modal-title my-title">Датум почетка ангажовања</h3>
+          <input type="text"
+           placeholder="Датум почетка ангажовања"
+           class="form-control"
+           [(bsValue)]="startDate"
+           [minDate]="minDate"
+           [maxDate]="maxDate"
+           bsDatepicker>
+        </div>
+        <div class="form-group">
+          <h3 class="modal-title my-title">Датум краја ангажовања</h3>
+            <input type="text"
+             placeholder="Датум краја ангажовања"
+             class="form-control"
+             [(bsValue)]="endDate"
+             [minDate]="startDate"
+             [maxDate]="maxDate"
+             bsDatepicker>
+        </div>
+      </form>
+
+      <h3>Разлог аплицирања на пројекат</h3>
+      <textarea type="text"
+                  class="reason"
+                  placeholder="Разлог аплицирања и знања која студент поседује"
+                  [(ngModel)]="reason"
+                  name = "reason"
+                  (blur)="validateReason()"
+                  [ngClass]="{'is-invalid': !reasonValid}"></textarea>
+      <!-- <div class="invalid-feedback">
+                    Please provide a valid city.
+      </div> -->
+    </div>
+    <button type="button" class="btn btn-primary apply" aria-label="Close" (click)="apply()">ПРИЈАВИ СЕ</button>
+  </div>
+</div>

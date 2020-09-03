@@ -1,0 +1,191 @@
+<!-- <div class="surround"> -->
+  <div class="content">
+
+    <div class="forma">
+      <h2 class="modal-title my-title" *ngIf="new">Нова фаза</h2>
+      <h2 class="modal-title my-title" *ngIf="!new">Измена фазе</h2>
+      <form #phaseForm="ngForm">
+        <div class="form-group together">
+          <div class="inline">
+            <h4 *ngIf="!new">Назив фазе</h4>
+            <input type="text"
+              placeholder="Назив фазе"
+              [(ngModel)] = "name"
+              required
+              name = "name"
+              class="form-control" required
+              (blur)="validateName()"
+              [ngClass]="{'is-invalid': !nameValid}">
+          </div>
+          <div class="inline">
+            <h4 *ngIf="!new">Опис фазе</h4>
+            <input type="text"
+              placeholder="Кратак oпис фазе"
+              [(ngModel)] = "description"
+              required
+              name = "description"
+              class="form-control" required
+              (blur)="validatePhaseDescription()"
+              [ngClass]="{'is-invalid': !phaseDescValid}">
+          </div>          
+        </div>
+
+                  
+        <div class="form-group together">
+          
+          <div class="inline">
+            <h4 *ngIf="!new"class="">Почетак фазе</h4>
+            <input type="text"
+              placeholder="Датум почетка фазе"
+              class="form-control small"
+              value="{{ date | date:'dd.MM.yyyy.' }}"
+              [minDate]="datum"
+              [(ngModel)] = "startDate"
+              required
+              name = "startDate"
+              bsDatepicker>
+          </div>
+          <div class="inline">
+            <h4 *ngIf="!new">Трајање пројекта(дани)</h4>
+            <input type="number"
+              placeholder="Трајање фазе у данима"
+              [(ngModel)] = "duration"
+              required
+              name = "duration"
+              class="form-control small"
+              min="1" required
+              (blur)="validateDuration()"
+              [ngClass]="{'is-invalid': !durationValid}">
+          </div>
+         
+        </div>
+        
+        <!-- Unosenje potrebnih vestina za fazu -->
+        <div class="form-group">
+          
+          <h3>Вештине неопходне за рад на фази</h3>
+          <div >
+            <input type="text"
+              placeholder="Назив неопходне вештине"
+              [(ngModel)] = "skillName"
+              required
+              name = "skillName"
+              class="form-control" required
+              (blur)="validateSkillName()"
+              [ngClass]="{'is-invalid': !skillNameValid}">
+          </div>
+          <div >
+            <input type="text"
+            placeholder="Опис неопходне вештине"
+            [(ngModel)] = "skillDesc"
+            required
+            name = "skillDesc"
+            class="form-control" required
+            (blur)="validateSkillDesc()"
+            [ngClass]="{'is-invalid': !skillDescValid}">
+          </div>
+          
+          <button type="button" class="btn btn-primary skill" (click)="addSkill()">Додај вештину</button>
+          <!-- Sve vestine-->
+          <table class="table table-borderless" *ngIf="this.skills !== undefined && skills.length>0">
+            <thead>
+              <tr>
+                <th scope="col">Назив вештине</th>
+                <th scope="col">Опис вештине</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let skill of skills">
+                <th scope="row">{{skill.name}}</th>
+                <th>{{skill.description}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Definisanje zaduzenja studenata -->
+        <div class="form-group" *ngIf="students !== null && students.length > 0">
+          <h3>Задужења студената у фази</h3>
+          <div class="form-group">
+            <button type="button" class="btn btn-primary" (click)="openModalWithComponent(template)" *ngIf="!anyoneToEngage()">Ново задужење</button>
+          </div>
+          <!-- Sva zaduzenja koja su definisana -->
+          <table class="table table-borderless" *ngIf="this.engagements !== undefined && this.engagements !== null && this.engagements.length>0">
+            <thead>
+              <tr>
+                <th scope="col">Назив задужења</th>
+                <th scope="col">Опис задужења</th>
+                <th scope="col">Ангажовани студент</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let eng of engagements">
+                <th scope="row">{{eng?.name}}</th>
+                <th>{{eng?.description}}</th>
+                <th>{{eng?.student?.name}} {{eng?.student?.surname}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-group buttons">
+          <button type="submit" class="btn btn-primary" (click)="save()" *ngIf="new">Сачувај фазу</button>
+          <button type="submit" class="btn btn-primary" (click)="edit()" *ngIf="!new">Измени фазу</button>
+          <button type="button" class="btn btn-primary" aria-label="Close" (click)="back()">Одустани</button>
+        </div>
+      </form>
+    </div>   
+  </div>
+
+  <!-- Template for engagements -->
+  <ng-template #template id = "template">
+    <div class="modal-header">
+      <h4 class="modal-title my-title pull-left">Додавање новог задужења</h4>
+      <button type="button" class="close pull-right btn-close" aria-label="Close"  (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #addEngagement="ngForm">
+        <div class="form-group">
+          <input type="text"
+                placeholder="Назив задужења"
+                [(ngModel)]="engName"
+                name = "engName"
+                class="form-control" required
+                (blur)="validateEngName()"
+                [ngClass]="{'is-invalid': !engNameValid}">
+        </div>
+        <div class="form-group">
+          <input type="text"
+          placeholder="Опис задужења"
+          [(ngModel)]="engDescription"
+          name = "engDescription"
+          class="form-control" required
+          (blur)="validateEngDesc()"
+          [ngClass]="{'is-invalid': !engDescValid}">
+        </div>
+        <div class="form-group">
+          <!-- Избор студента за дефинисано задужење -->
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Избор студента за рад на задужењу</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of notEngagedStudents; let i = index" (click)="selected(s,i);" [class.active]="i == selectedRow">
+                <th scope="row">{{s.name}} {{s.surname}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="form-group buttons">
+          <button type="submit" class="btn btn-primary" (click)="addAssignment()">Додај</button>
+          <button type="button" class="btn btn-primary" aria-label="Close"  (click)="modalRef.hide()">Одустани</button>
+        </div>
+      </form>
+  </div>
+</ng-template>
+
+<!-- </div> -->

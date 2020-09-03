@@ -1,0 +1,11 @@
+<div class="surround">
+  <div class="content">
+    <img id = "logo" src="../../../assets/images/irc_logo.png" alt="irc_logo">
+    <div class="project_name" *ngFor="let project of projects">
+        <button type="button" class="btn btn-primary" [routerLink]="['/projects/', project.projectID]">
+          {{project.projectProposal.name}}
+        </button>
+    </div>
+    <h1>ПРОЈЕКТИ</h1>
+  </div>
+</div>
